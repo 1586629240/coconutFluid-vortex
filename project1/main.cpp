@@ -1,7 +1,6 @@
 #include <iostream>
 #include <cmath>
 #include <complex>
-#include <fftw3.h>
 #include <vector>
 #include <easyx.h>
 #include <format>
@@ -138,7 +137,7 @@ void mgN(double dx, double dy, int nlevel, const v2d& f, v2d& un) {
 	for (auto& x : nf[0])
 		for (auto& i : x)i = -i;
 
-	for (int i = 0; i < nlevel - 1; i++)//向下
+	for (int i = 0; i < nlevel - 1; i++)//脧貌脧脗
 	{
 		gauss_seidel_mg(lnx[i], lny[i], ldx[i], ldy[i], nf[i], nu[i]);
 		compute_residual(lnx[i], lny[i], ldx[i], ldy[i], nf[i], nu[i], nr[i]);
@@ -148,7 +147,7 @@ void mgN(double dx, double dy, int nlevel, const v2d& f, v2d& un) {
 		lnx[nlevel - 1], lny[nlevel - 1], ldx[nlevel - 1], ldy[nlevel - 1],
 		nf[nlevel - 1], nu[nlevel - 1]);
 
-	for (int i = nlevel - 1; i > 0; i--)//向上
+	for (int i = nlevel - 1; i > 0; i--)//脧貌脡脧
 	{
 		prolongation(lnx[i], lny[i], lnx[i - 1], lny[i - 1], nu[i], nr[i - 1]);
 		for (int j = 1; j < lny[i - 1]; j++)
